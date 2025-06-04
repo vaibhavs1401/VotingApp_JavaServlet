@@ -6,8 +6,8 @@ import java.sql.DriverManager;
 public class DbUtil {
 	public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
 	public static final String DB_URL = "jdbc:mysql://localhost:3306/dacdb";
-	public static final String DB_USER = "nilesh";
-	public static final String DB_PASSWD = "nilesh";
+	public static final String DB_USER = "D6_89465_Vaibhav";
+	public static final String DB_PASSWD = "manager";
 	
 	static {
 		// load and register driver

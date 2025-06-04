@@ -8,6 +8,7 @@ import com.sunbeam.daos.UserDaoImpl;
 import com.sunbeam.entities.User;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,6 +30,11 @@ public class LoginServlet extends HttpServlet{
 		try(UserDao userDao = new UserDaoImpl()){
 			User dbUser = userDao.findByEmail(email);
 			if(dbUser!=null && dbUser.getPassword().equals(passwd)) {
+				if(dbUser.getRole().equals("admin")) {
+					
+				}else {
+					resp.sendRedirect("candlist");
+				}
 				
 			}else {
 				resp.setContentType("text/html");
