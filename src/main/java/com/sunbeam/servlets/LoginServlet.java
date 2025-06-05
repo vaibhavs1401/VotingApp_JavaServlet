@@ -13,6 +13,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 @WebServlet("/login")
@@ -34,6 +35,10 @@ public class LoginServlet extends HttpServlet{
 				Cookie c = new Cookie("uname", dbUser.getFirstName());
 				c.setMaxAge(3600);
 				resp.addCookie(c);
+				//after login successful - store user obj in session
+				HttpSession session = req.getSession();
+				session.setAttribute("user", dbUser);
+				
 				if(dbUser.getRole().equals("admin")) {
 					resp.sendRedirect("result");
 					

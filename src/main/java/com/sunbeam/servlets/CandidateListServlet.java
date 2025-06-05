@@ -65,5 +65,6 @@ public class CandidateListServlet extends HttpServlet {
 		out.println("</html>");	
 		
 		
+		
 	}
 }
