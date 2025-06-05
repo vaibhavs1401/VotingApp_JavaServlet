@@ -9,6 +9,7 @@ import com.sunbeam.entities.User;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,6 +31,9 @@ public class LoginServlet extends HttpServlet{
 		try(UserDao userDao = new UserDaoImpl()){
 			User dbUser = userDao.findByEmail(email);
 			if(dbUser!=null && dbUser.getPassword().equals(passwd)) {
+				Cookie c = new Cookie("uname", dbUser.getFirstName());
+				c.setMaxAge(3600);
+				resp.addCookie(c);
 				if(dbUser.getRole().equals("admin")) {
 					resp.sendRedirect("result");
 					

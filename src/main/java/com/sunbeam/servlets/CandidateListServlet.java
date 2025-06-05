@@ -9,6 +9,7 @@ import com.sunbeam.entities.Candidate;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,7 +45,15 @@ public class CandidateListServlet extends HttpServlet {
 		out.println("<title>Candidates</title>");
 		out.println("</head>");
 		out.println("<body>");
-		
+		String uname = "";
+		Cookie arr[] = req.getCookies();
+		if(arr != null && arr.length > 0) {
+			for(Cookie c: arr) {
+				if(c.getName().equals("uname"))
+					uname = c.getValue();
+			}
+		}
+		out.println("Hello, " + uname + "<br/>");
 		out.println("<h3>Candidate List</h3>");
 		out.println("<form method='post' action='vote'>");
 		// <input type='radio' name='candidate' value='id?'/> candname?

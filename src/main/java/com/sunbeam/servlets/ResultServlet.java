@@ -1,9 +1,9 @@
 package com.sunbeam.servlets;
 
+import jakarta.servlet.http.Cookie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -36,6 +36,16 @@ public class ResultServlet extends HttpServlet{
 		out.println("<title>Result</title>");
 		out.println("</head>");
 		out.println("<body>");
+		String uname = "";
+		Cookie[] arr = req.getCookies();
+		if(arr != null && arr.length > 0) {
+			for(Cookie c : arr) {
+				if(c.getName().equals("uname"))
+					uname = c.getValue();
+			}
+		}
+		out.println("Hello, " + uname + "<br/>");
+		
 		out.println("<h3>Candidate List</h3>");
 		out.println("<table border='1'>");
 		out.println("<thead>");
