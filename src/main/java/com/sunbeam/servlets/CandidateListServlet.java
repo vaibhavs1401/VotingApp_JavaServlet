@@ -40,29 +40,40 @@ public class CandidateListServlet extends HttpServlet {
 		
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
+		out.println("<!DOCTYPE html>");
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>Candidates</title>");
+		out.println("<style>");
+		out.println("body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; }");
+		out.println("form { background-color: white; padding: 20px; border: 1px solid #ccc; width: 300px; }");
+		out.println("h3 { margin-bottom: 15px; }");
+		out.println("input[type='submit'] { margin-top: 10px; padding: 6px; }");
+		out.println("</style>");
 		out.println("</head>");
 		out.println("<body>");
+
+
 		String uname = "";
 		Cookie arr[] = req.getCookies();
-		if(arr != null && arr.length > 0) {
-			for(Cookie c: arr) {
-				if(c.getName().equals("uname"))
-					uname = c.getValue();
-			}
+		if (arr != null && arr.length > 0) {
+		    for (Cookie c : arr) {
+		        if (c.getName().equals("uname"))
+		            uname = c.getValue();
+		    }
 		}
-		out.println("Hello, " + uname + "<br/>");
+		out.println("<p>Hello, " + uname + "</p>");
 		out.println("<h3>Candidate List</h3>");
 		out.println("<form method='post' action='vote'>");
-		// <input type='radio' name='candidate' value='id?'/> candname?
-		for(Candidate c:list)
-			out.printf("<input type='radio' name='candidate' value='%d'/> %s - %s <br/>\n", c.getId(), c.getName(), c.getParty());
+
+		for (Candidate c : list)
+		    out.printf("<label><input type='radio' name='candidate' value='%d'/> %s - %s</label><br/>\n", c.getId(), c.getName(), c.getParty());
+
 		out.println("<input type='submit' value='Vote'/>");
-		out.println("</form>");		
+		out.println("</form>");
 		out.println("</body>");
-		out.println("</html>");	
+		out.println("</html>");
+	
 		
 		
 		
