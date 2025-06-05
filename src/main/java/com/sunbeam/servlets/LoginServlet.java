@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet{
 			User dbUser = userDao.findByEmail(email);
 			if(dbUser!=null && dbUser.getPassword().equals(passwd)) {
 				if(dbUser.getRole().equals("admin")) {
+					resp.sendRedirect("result");
 					
 				}else {
 					resp.sendRedirect("candlist");
